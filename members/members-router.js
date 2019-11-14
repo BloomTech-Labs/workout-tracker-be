@@ -23,11 +23,11 @@ router.get('/:id', (req, res) => {
     if (Members) {
       res.json(Members);
     } else {
-      res.status(404).json({ message: 'Could not find members with given id.' })
+      res.status(404).json({ message: 'Could not find member with given id.' })
     }
   })
   .catch(err => {
-    res.status(500).json({ message: 'Failed to get members' });
+    res.status(500).json({ message: 'Failed to get member' });
   });
 });
 
@@ -52,11 +52,11 @@ router.put('/:id', (req, res) => {
     if (members) {
       res.json({ update: members });
     } else {
-      res.status(404).json({ message: 'Could not find members with given id' });
+      res.status(404).json({ message: 'Could not find member with given id' });
     }
   })
   .catch(err => {
-    res.status(500).json({ message: 'Failed to update members' });
+    res.status(500).json({ message: 'Failed to update member' });
   });
 });
 
@@ -68,11 +68,11 @@ router.delete('/:id', (req, res) => {
     if (count) {
       res.json({ removed: count });
     } else {
-      res.status(404).json({ message: 'Could not find members with given id' });
+      res.status(404).json({ message: 'Could not find member with given id' });
     }
   })
   .catch(err => {
-    res.status(500).json({ message: 'Failed to delete members' });
+    res.status(500).json({ message: 'Failed to delete member' });
   });
 });
 
