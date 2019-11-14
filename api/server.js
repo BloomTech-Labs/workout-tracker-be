@@ -5,13 +5,15 @@ require('dotenv').config();
 
 const server = express();
 
-const MembersRoute = require('../members/members-router')
+const MembersRouter = require('../members/members-router')
+const MembersStatusRouter = require('../membersStatus/memberStatus-router')
 
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('api/members', MembersRoute);
+server.use('api/members', MembersRouter);
+server.use('api/membersstatus', MembersStatusRouter);
 server.use(express.static(__dirname + '/../client/build/'));
 
 module.exports = server;
