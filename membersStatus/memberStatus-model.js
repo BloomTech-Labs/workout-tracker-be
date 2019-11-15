@@ -1,4 +1,4 @@
-const db = require('../data/firstrep.db3')
+const db = require('../database/db-config')
 
 module.exports = {
     find,
