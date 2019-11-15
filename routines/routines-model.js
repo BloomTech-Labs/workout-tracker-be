@@ -5,6 +5,7 @@ module.exports ={
     findRoutineById,
     findRoutineExercises,
     findRoutineExerciseById,
+    findRoutineExerciseBy,
     addRoutine,
     addExercise,
     removeRoutine,
@@ -45,6 +46,10 @@ function findRoutineExercises() {
 
 function findRoutineExerciseById(id) {
     return db('routine_exercises').where({ id }).first();
+}
+
+function findRoutineExerciseBy(filter) {
+return db('routine_exercises').where(filter)
 }
 
 function addExercise(data) {
