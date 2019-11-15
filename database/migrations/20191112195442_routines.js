@@ -3,7 +3,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('routines', tbl => {
       tbl.increments();
       tbl.string('routine_name').notNullable();
-      tbl.string('routing_description').notNullable();
+      tbl.string('routine_description').notNullable();
       tbl.integer('member_id')
         .notNullable()
         .unsigned()
