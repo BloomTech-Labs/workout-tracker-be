@@ -5,7 +5,6 @@ exports.up = function(knex) {
       tbl.string('first_name', 128).notNullable();
       tbl.string('last_name', 128).notNullable();
       tbl.string('Email', 128).notNullable();
-      tbl.string('password', 128).notNullable();
   })
   .createTable('member_status', tbl => {
       tbl.increments();
@@ -18,7 +17,8 @@ exports.up = function(knex) {
   })
   .createTable('member_records', tbl => {
       tbl.increments();
-      tbl.integer('date');
+      tbl.string('value', 128).notNullable();
+      tbl.integer('date').notNullable();
   })
 };
 
