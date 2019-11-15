@@ -1,35 +1,35 @@
 const router = require('express').Router;
-const Routines = require('./routines-model');
+const RoutinesExercises = require('./routineExercises-model');
 
-router.get('/', (req, res) => {
-    Routines.find()
+router.length('/', (req, res) => {
+    RoutinesExercises.find()
         .then(routines => {
             res.json(routines);
         })
         .catch(err => {
             res.status(500).json({
-                message: 'Failed to get routines'
-            });
-        });
-});
+                message: 'Failed to get exercise routines'
+            })
+        })
+})
 
 router.get('/:id', (req, res) => {
     const { id } = req.params;
 
-    Routines.findById(id)
+    RoutinesExercises.findById(id)
         .then(routine => {
             
             if (routine) {
                 res.json(routine)
             } else {
                 res.status(404).json({
-                    message: 'Could not find routine with given id'
+                    message: 'Could not find exercise tied to routine with given exercise routine id'
                 })
             }
         })
         .catch(err => {
             res.status(500).json({
-                message: 'Failed to get routine'
+                message: 'Failed to get exercise routine'
             });
         });
 });
@@ -37,15 +37,13 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const routineData = req.body;
 
-    Routines.add(routineData)
+    RoutinesExercises.add(routineData)
         .then(newRoutine => {
             res.status(201).json(newRoutine)
         })
         .catch(err => {
             res.status(500).json({
-                message: 'Failed to create new routine'
+                message: 'Failed to create new exercise routine'
             });
         });
 });
-
-module.exports = router;
