@@ -33,5 +33,7 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema
+        .dropTableIfExists('routine_exercises')
+        .dropTableIfExists('routines')
 };

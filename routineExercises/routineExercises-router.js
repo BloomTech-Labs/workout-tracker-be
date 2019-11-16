@@ -1,7 +1,10 @@
-const router = require('express').Router;
+const express = require('express');
+
 const RoutinesExercises = require('./routineExercises-model');
 
-router.length('/', (req, res) => {
+const router = express.Router();
+
+router.get('/', (req, res) => {
     RoutinesExercises.find()
         .then(routines => {
             res.json(routines);
@@ -47,3 +50,5 @@ router.post('/', (req, res) => {
             });
         });
 });
+
+module.exports = router;
