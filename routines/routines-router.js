@@ -1,5 +1,8 @@
-const router = require('express').Router;
+const express = require('express');
+
 const Routines = require('./routines-model');
+
+const router = express.Router();
 
 router.get('/', (req, res) => {
     Routines.find()
