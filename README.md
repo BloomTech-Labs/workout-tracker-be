@@ -32,24 +32,35 @@ To get the server running locally:
 
 🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-#### Organization Routes
+#### Members Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+| GET    | `/api/members`          | owners         | Returns all members.                         |
+| GET    | `/api/members/:id`      | owners         | Return member with given ID.                 |
+| POST   | `/api/members`          | owners         | Add a new member.                            |
+| PUT    | `/api/members/:id`      | owners         | Update member with given ID.                 |
+| DELETE | `/api/members/:id`      | owners         | Delete member with given ID.                 |
 
-#### User Routes
+#### Member Status Routes
 
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/membersstatus`    | owners         | Returns all members status.                  |
+| GET    | `/api/membersstatus/:id`| owners         | Return member status with given ID.          |
+| POST   | `/api/membersstatus`    | owners         | Add a new status to member.                  |
+| PUT    | `/api/membersstatus/:id`| owners         | Update member status with given ID.          |
+| DELETE | `/api/membersstatus/:id`| owners         | Delete member status with given ID.          |
+
+#### Member Status Routes
+
+| Method | Endpoint                 | Access Control | Description                                  |
+| ------ | ------------------------ | -------------- | -------------------------------------------- |
+| GET    | `/api/membersrecords`    | owners         | Returns all members recordsstatus.           |
+| GET    | `/api/membersrecords/:id`| owners         | Return member record with given ID.          |
+| POST   | `/api/membersrecords`    | owners         | Add a new record to member.                  |
+| PUT    | `/api/membersrecords/:id`| owners         | Update member record with given ID.          |
+| DELETE | `/api/membersrecords/:id`| owners         | Delete member record with given ID.          |
 
 # Data Model
 
