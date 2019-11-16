@@ -680,7 +680,7 @@ express-session@1.4.0:
     rand-token "0.2.1"
     utils-merge "1.0.0"
 
-express@3.11.0:
+express@~3.11.0:
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/express/-/express-3.11.0.tgz#f1c8e1c991a444dd7ae331bfb7f1a4557fcfd2ee"
   integrity sha1-8cjhyZGkRN164zG/t/GkVX/P0u4=
