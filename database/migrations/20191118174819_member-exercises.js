@@ -6,12 +6,16 @@ exports.up = function(knex) {
       .unsigned()
       .notNullable()
       .references('id')
-      .inTable('member_table');
+      .inTable('member_table')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE');
     tbl.integer('routine_id')
       .unsigned()
       .notNullable()
       .references('id')
-      .inTable('routines');
+      .inTable('routines')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE');
     tbl.integer('date')
 })
 };
