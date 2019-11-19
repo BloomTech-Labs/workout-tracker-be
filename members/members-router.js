@@ -43,6 +43,25 @@ router.post('/', (req, res) => {
   });
 });
 
+router.post('/login', (req, res) => {
+  let { Email } = req.body;
+
+  Members.findBy({ Email })
+    .first()
+    .then(user => {
+      if (user) {
+        res.status(200).json({
+          message: `Welcome ${user.Email}!`,
+        });
+      } else {
+        res.status(401).json({ message: 'Invalid Credentials' });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
