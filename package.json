@@ -4,7 +4,7 @@
   "description": "🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.",
   "main": "index.js",
   "engines": {
-    "node": "12.13.0",
+    "node": "10.15.3",
     "npm": "6.11.3"
   },
   "scripts": {
@@ -18,16 +18,14 @@
     "express": "^4.17.1",
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.19.0",
+    "knex": "^0.20.1",
     "node": "^12.13.0",
     "node.js": "^0.0.0",
-    "npm": "^6.13.0",
     "path": "^0.12.7",
-    "pg": "^7.12.1"
-  },
-  "devDependencies": {
+    "pg": "^7.12.1",
     "sqlite3": "^4.1.0"
   },
+  "devDependencies": {},
   "repository": {
     "nodemon": "^1.19.2",
     "type": "git",
