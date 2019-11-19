@@ -44,14 +44,14 @@ router.post('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  let { Email } = req.body;
+  let { username, password } = req.body;
 
-  Members.findBy({ Email })
+  Members.findBy({ username })
     .first()
     .then(user => {
-      if (user) {
+      if (username && password ) { 
         res.status(200).json({
-          message: `Welcome ${user.Email}!`,
+          message: `Welcome ${user.first_name}!`,
         });
       } else {
         res.status(401).json({ message: 'Invalid Credentials' });
