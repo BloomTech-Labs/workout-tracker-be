@@ -3,6 +3,7 @@ const db = require('../database/db-config')
 module.exports = {
     find,
     findById,
+    findBy,
     add,
     update,
     remove
@@ -16,7 +17,7 @@ function findById(id) {
     return db('routine_exercises').where({ id }).first();
 }
 
-function findById(filter) {
+function findBy(filter) {
 return db('routine_exercises').where(filter)
 }
 
