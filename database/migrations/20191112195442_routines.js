@@ -28,7 +28,7 @@ exports.up = function(knex) {
         .inTable('routines')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
-      tbl.date('exercise_date').notNullable();
+      tbl.timestamp('exercise_date').defaultTo(knex.fn.now());
   })
 };
 
