@@ -95,4 +95,16 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+router.get('/:id/status', (req, res) => {
+  const { id } = req.params;
+
+  Members.findStatus(id)
+  .then(status => {
+    res.json(status);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'failed to get status' })
+  })
+});
+
 module.exports = router;
