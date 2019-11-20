@@ -43,6 +43,25 @@ router.post('/', (req, res) => {
   });
 });
 
+router.post('/login', (req, res) => {
+  let { username, password } = req.body;
+
+  Members.findBy({ username })
+    .first()
+    .then(user => {
+      if (username && password ) { 
+        res.status(200).json({
+          message: `Welcome ${user.first_name}!`,
+        });
+      } else {
+        res.status(401).json({ message: 'Invalid Credentials' });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
@@ -74,6 +93,18 @@ router.delete('/:id', (req, res) => {
   .catch(err => {
     res.status(500).json({ message: 'Failed to delete member' });
   });
+});
+
+router.get('/:id/status', (req, res) => {
+  const { id } = req.params;
+
+  Members.findStatus(id)
+  .then(status => {
+    res.json(status);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'failed to get status' })
+  })
 });
 
 module.exports = router;
