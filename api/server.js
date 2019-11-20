@@ -6,8 +6,7 @@ require('dotenv').config();
 const server = express();
 
 const MembersRouter = require('../members/members-router')
-const MembersStatusRouter = require('../membersStatus/memberStatus-router')
-const MembersRecordsRouter = require('../memberRecords/memberRecords-router')
+const MemberStatusRouter = require('../membersStatus/memberStatus-router')
 const routinesRouter = require('../routines/routines-router');
 const routinesExercisesRouter = require('../routineExercises/routineExercises-router')
 
@@ -16,8 +15,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/members', MembersRouter);
-server.use('/api/membersstatus', MembersStatusRouter);
-server.use('/api/membersrecords', MembersRecordsRouter);
+server.use('/api/memberstatus', MemberStatusRouter);
 server.use('/api/routines', routinesRouter);
 server.use('/api/routinesexercises', routinesExercisesRouter);
 server.use(express.static(__dirname + '/../client/build/'));

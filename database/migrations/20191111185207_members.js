@@ -13,20 +13,22 @@ exports.up = function(knex) {
       tbl.integer('weight').notNullable();
       tbl.integer('height').notNullable();
       tbl.integer('bmi').notNullable();
-      tbl.integer('bench_max');
-      tbl.integer('squat_max');
-      tbl.integer('mile_time');
-  })
-  .createTable('member_records', tbl => {
-      tbl.increments();
-      tbl.string('value', 128).notNullable();
+      tbl.integer('bench_max').notNullable();
+      tbl.integer('squat_max').notNullable();
+      tbl.integer('mile_time').notNullable();
       tbl.integer('date').notNullable();
+      tbl.integer('member_id')
+        .notNullable()
+        .unsigned()
+        .references('id')
+        .inTable('member_table')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE');
   })
 };
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists('member_records')
         .dropTableIfExists('member_status')
         .dropTableIfExists('member_table')
 };
