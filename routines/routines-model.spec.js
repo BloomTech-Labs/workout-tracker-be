@@ -63,4 +63,23 @@ describe('the routines model', () => {
             expect(res.status).toBe(200);
         })
     })
+
+    describe('the delete model', () => {
+
+        it('should return and object', async () => {
+            const data = { routine_name: "Upper Body", routine_description: "Tri's and Bi's", member_id: 1 };
+            const routine = await Routines.add(data);
+            const remove = await Routines.remove(1);
+
+            expect(remove).toEqual(1)
+        })
+
+        it('should return a status code of 200', async () => {
+            const data = { routine_name: "Upper Body", routine_description: "Tri's and Bi's", member_id: 1 };
+            const routine = await Routines.add(data);
+            const res = await request(server).delete('/api/routines/1');
+
+            expect(res.status).toBe(200);
+        })
+    })
 })
