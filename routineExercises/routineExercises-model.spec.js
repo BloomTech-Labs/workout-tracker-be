@@ -42,4 +42,44 @@ describe('the routines model', () => {
             expect(res.status).toBe(201)
         })
     })
+
+    describe('The update model', () => {
+
+        it('should return an object', async () => {
+            const data = { member_id: 1, routine_id: 1, exercise_date: 1};
+            const routine = await RoutineExercises.add(data);
+            const updateData = { member_id: 2, routine_id: 2, exercise_date: 2};
+            const update = await RoutineExercises.update(1, updateData);
+
+            expect(update).toEqual({ id: 1, member_id: 2, routine_id: 2, exercise_date: 2 })
+        })
+
+        it('should return a status code of 200', async () => {
+            const data = { member_id: 1, routine_id: 1, exercise_date: 1};
+            const routine = await RoutineExercises.add(data);
+            const updateData = { member_id: 2, routine_id: 2, exercise_date: 2};
+            const res = await request(server).put('/api/routinesexercises/1').set('Accept', 'application/json').send(updateData);
+
+            expect(res.status).toBe(200);
+        })
+    })
+
+    describe('the delete model', () => {
+
+        it('should return and object', async () => {
+            const data = { member_id: 1, routine_id: 1, exercise_date: 1};
+            const routine = await RoutineExercises.add(data);
+            const remove = await RoutineExercises.remove(1);
+
+            expect(remove).toEqual(1)
+        })
+
+        it('should return a status code of 200', async () => {
+            const data = { member_id: 1, routine_id: 1, exercise_date: 1};
+            const routine = await RoutineExercises.add(data);
+            const res = await request(server).delete('/api/routinesexercises/1');
+
+            expect(res.status).toBe(200);
+        })
+    })
 })
