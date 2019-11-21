@@ -24,7 +24,7 @@ return db('routine_exercises').where(filter)
 function add(data) {
     return db('routine_exercises').insert(data)
         .then(newitem => {
-            return findRoutineExerciseById(newitem[0]);
+            return findById(newitem[0]);
         });
 }
 

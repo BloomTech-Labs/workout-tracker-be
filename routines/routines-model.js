@@ -20,7 +20,7 @@ function findById(id) {
 function add(data) {
     return db('routines').insert(data)
         .then(newRoutine => {
-            return findRoutineById(newRoutine[0]);
+            return findById(newRoutine[0]);
         });
 }
 
