@@ -26,7 +26,7 @@ describe('the routines model', () => {
         })
     })
 
-    describe('THe add model', () => {
+    describe('The add model', () => {
 
         it('should return an object', async () => {
             const data = { member_id: 1, routine_id: 1, exercise_date: 1};

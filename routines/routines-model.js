@@ -31,6 +31,6 @@ function remove(id) {
 function update(id, changes) {
     return db('routines').where({ id }).update(changes)
         .then(update => {
-            return findRoutineById(id);
+            return findById(id);
         })
 }

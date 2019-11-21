@@ -26,7 +26,7 @@ describe('the routines model', () => {
         })
     })
 
-    describe('THe add model', () => {
+    describe('The add model', () => {
 
         it('should return an object', async () => {
             const data = { routine_name: "Upper Body", routine_description: "Tri's and Bi's", member_id: 1 };
@@ -40,6 +40,27 @@ describe('the routines model', () => {
             const res = await request(server).post('/api/routines').set('Accept', 'application/json').send(data);
 
             expect(res.status).toBe(201)
+        })
+    })
+
+    describe('The update model', () => {
+
+        it('should return an object', async () => {
+            const data = { routine_name: "Upper Body", routine_description: "Tri's and Bi's", member_id: 1 };
+            const routine = await Routines.add(data);
+            const updateData = { routine_name: "Lower Body", routine_description: "Quads and Calfs", member_id: 1 };
+            const update = await Routines.update(1, updateData);
+
+            expect(update).toEqual({ id: 1, routine_name: "Lower Body", routine_description: "Quads and Calfs", member_id: 1 })
+        })
+
+        it('should return a status code of 200', async () => {
+            const data = { routine_name: "Upper Body", routine_description: "Tri's and Bi's", member_id: 1 };
+            const routine = await Routines.add(data);
+            const updateData = { routine_name: "Lower Body", routine_description: "Quads and Calfs", member_id: 1 };
+            const res = await request(server).put('/api/routines/1').set('Accept', 'application/json').send(updateData);
+
+            expect(res.status).toBe(200);
         })
     })
 })
