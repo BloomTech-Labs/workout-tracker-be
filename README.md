@@ -34,70 +34,59 @@ To get the server running locally:
 
 #### Members Routes
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/api/members`          | owners         | Returns all members.                         |
-| GET    | `/api/members/:id`      | owners         | Return member with given ID.                 |
-| POST   | `/api/members`          | owners         | Add a new member.                            |
-| PUT    | `/api/members/:id`      | owners         | Update member with given ID.                 |
-| DELETE | `/api/members/:id`      | owners         | Delete member with given ID.                 |
-
-#### Member Status Routes
-
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/api/membersstatus`    | owners         | Returns all members status.                  |
-| GET    | `/api/membersstatus/:id`| owners         | Return member status with given ID.          |
-| POST   | `/api/membersstatus`    | owners         | Add a new status to member.                  |
-| PUT    | `/api/membersstatus/:id`| owners         | Update member status with given ID.          |
-| DELETE | `/api/membersstatus/:id`| owners         | Delete member status with given ID.          |
-
-#### Member Status Routes
-
 | Method | Endpoint                 | Access Control | Description                                  |
 | ------ | ------------------------ | -------------- | -------------------------------------------- |
-| GET    | `/api/membersrecords`    | owners         | Returns all members recordsstatus.           |
-| GET    | `/api/membersrecords/:id`| owners         | Return member record with given ID.          |
-| POST   | `/api/membersrecords`    | owners         | Add a new record to member.                  |
-| PUT    | `/api/membersrecords/:id`| owners         | Update member record with given ID.          |
-| DELETE | `/api/membersrecords/:id`| owners         | Delete member record with given ID.          |
+| GET    | `/api/members`           | owners         | Returns all members.                         |
+| GET    | `/api/members/:id`       | owners         | Return member with given ID.                 |
+| GET    | `/api/members/:id/status`| owners         | Return status of a given ID member.          |
+| POST   | `/api/members`           | owners         | Add a new member.                            |
+| PUT    | `/api/members/:id`       | owners         | Update member with given ID.                 |
+| DELETE | `/api/members/:id`       | owners         | Delete member with given ID.                 |
+
+#### Member Status Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/memberstatus`     | owners         | Returns all members status.                  |
+| GET    | `/api/memberstatus/:id` | owners         | Return member status with given ID.          |
+| POST   | `/api/memberstatus`     | owners         | Add a new status to member.                  |
+| PUT    | `/api/memberstatus/:id` | owners         | Update member status with given ID.          |
+| DELETE | `/api/memberstatus/:id` | owners         | Delete member status with given ID.          |
 
 # Data Model
 
 🚫This is just an example. Replace this with your data model
 
-#### 2️⃣ ORGANIZATIONS
+#### 2️⃣ MEMBERS
 
 ---
 
 ```
 {
   id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
+  first_name: STRING
+  last_name: STRING
+  email: STRING
+  username: STRING
+  password: STRING
 }
 ```
 
-#### USERS
+#### STATUS
 
 ---
 
 ```
 {
   id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  omember_id: UUID foreign key in MEMBERS table
+  weight: STRING
+  height: STRING
+  bmi: BOOLEAN
+  bench_max: BOOLEAN
+  squat_max: BOOLEAN
+  mile_timet: BOOLEAN
+  date: BOOLEAN
 }
 ```
 
