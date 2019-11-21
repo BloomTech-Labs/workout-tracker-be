@@ -34,14 +34,18 @@ To get the server running locally:
 
 #### Members Routes
 
-| Method | Endpoint                 | Access Control | Description                                  |
-| ------ | ------------------------ | -------------- | -------------------------------------------- |
-| GET    | `/api/members`           | owners         | Returns all members.                         |
-| GET    | `/api/members/:id`       | owners         | Return member with given ID.                 |
-| GET    | `/api/members/:id/status`| owners         | Return status of a given ID member.          |
-| POST   | `/api/members`           | owners         | Add a new member.                            |
-| PUT    | `/api/members/:id`       | owners         | Update member with given ID.                 |
-| DELETE | `/api/members/:id`       | owners         | Delete member with given ID.                 |
+| Method | Endpoint                     | Access Control | Description                                  |
+| ------ | ---------------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/members`               | owners         | Returns all members.                         |
+| GET    | `/api/members/:id`           | owners         | Return member with given ID.                 |
+| GET    | `/api/members/:id/status/`   | owners         | Return status of a given ID member.          |
+| GET    | `/api/members/:id/status/:id`| owners         | Return given ID status of a given ID member. |
+| POST   | `/api/members`               | owners         | Add a new member.                            |
+| POST   | `/api/members/id/status`     | owners         | Add a new status to a member.                |
+| PUT    | `/api/members/:id`           | owners         | Update member with given ID.                 |
+| PUT    | `/api/members/:id/status/id` | owners         | Update given ID status of a given ID member. |
+| DELETE | `/api/members/:id/'          | owners         | Delete member with given ID.                 |
+| DELETE | `/api/members/:id/status/id' | owners         | Delete given ID status of a given ID member. |
 
 #### Member Status Routes
 
