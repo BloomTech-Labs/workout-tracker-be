@@ -16,7 +16,7 @@ exports.up = function(knex) {
       tbl.integer('bench_max').notNullable();
       tbl.integer('squat_max').notNullable();
       tbl.integer('mile_time').notNullable();
-      tbl.integer('date').notNullable();
+      tbl.timestamp('exercise_date').defaultTo(knex.fn.now());
       tbl.integer('member_id')
         .notNullable()
         .unsigned()
