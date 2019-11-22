@@ -2,6 +2,8 @@ const express = require('express');
 
 const Members = require('./members-model')
 
+const Status = require('../membersStatus/memberStatus-model')
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -31,7 +33,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   const memberData = req.body;
 
   Members.add(memberData)
@@ -39,7 +41,7 @@ router.post('/', (req, res) => {
     res.status(201).json(newmember);
   })
   .catch(err => {
-    res.status(500).json({ message: 'Failed to create new member' });
+    res.status(500).json({  message: 'Failed to create new member' });
   });
 });
 
@@ -106,5 +108,82 @@ router.get('/:id/status', (req, res) => {
     res.status(500).json({ message: 'failed to get status' })
   })
 });
+
+router.post('/:id/status', requiredBody, (req, res) => {
+  const statusInfo = { ...req.body, member_id: req.params.id };
+
+  Status.add(statusInfo)
+  .then(status => {
+    res.status(210).json(status);
+  })
+  .catch(error => {
+    // log error to server
+    console.log(error);
+    res.status(500).json({
+      message: 'Error adding status for the member',
+    });
+  });
+});
+
+router.get('/:id/status/:id', (req, res) => {
+  const { id } = req.params;
+
+  Status.findById(id)
+  .then(Status => {
+
+    if(Status) {
+        res.json(Status);
+    } else {
+        res.status(404).json({ message: 'Could not find member status with given id.' })
+    }
+})
+.catch(err => {
+    res.status(500).json({ message: 'Failed to get member status' })
+});
+});
+
+router.put('/:id/status/:id', (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  Status.update(id, changes)
+  .then(Status => {
+    if (Status) {
+        res.json({ update: Status });
+    } else {
+        res.status(404).json({ message: 'Could not find member status with given id' })
+    }
+})
+.catch(err => {
+    res.status(500).json({ message: 'Failed to update member status' })
+  });
+});
+
+router.delete('/:id/status/:id', requiredBody, (req, res) => {
+  const { id } = req.params;
+
+  Status.remove(id)
+  .then(count => {
+      if (count) {
+          res.json({ removed: count });
+      } else {
+          res.status(404).json({ message: 'Could not find member status with given id'})
+      }
+  })
+  .catch(err => {
+      res.status(500).json({ message: 'Failed to delete member status' })
+  })
+});
+
+
+function requiredBody(req, res, next) {
+  if (req.body && Object.keys(req.body).length > 0){
+    next();
+  } else {
+    //res.status(400).json({ message: "Please include request body"});
+
+    next({ message: 'Please include request body'})
+  }
+}
 
 module.exports = router;
