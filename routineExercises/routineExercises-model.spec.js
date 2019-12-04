@@ -11,18 +11,34 @@ describe('the routines model', () => {
 
     describe('The get model', () => {
 
-        it('should return status code 200', async () => {
+        it('Find should return status code 200', async () => {
             const res = await request(server).get('/api/routinesexercises');
 
             expect(res.status).toBe(200)
         })
 
-        it('should return an object', async () => {
+        it('Find should return an object', async () => {
             const data = { member_id: 1, routine_id: 1, exercise_date: 1};
             const routine = await RoutineExercises.add(data);
             const get = await RoutineExercises.find();
 
             expect(get.length).toBe(1);
+        })
+
+        it('FindById should return status code 200', async () => {
+            const data = { member_id: 1, routine_id: 1, exercise_date: 1};
+            const routine = await RoutineExercises.add(data);
+            const res = await request(server).get('/api/routinesexercises/1');
+
+            expect(res.status).toBe(200)
+        })
+
+        it('FindById should return an object', async () => {
+            const data = { member_id: 1, routine_id: 1, exercise_date: 1};
+            const routine = await RoutineExercises.add(data);
+            const get = await RoutineExercises.findById(1);
+
+            expect(get).toEqual({"exercise_date": 1, "id": 1, "member_id": 1, "routine_id": 1})
         })
     })
 
