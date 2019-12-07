@@ -33,16 +33,24 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', (req, res) => {
   const memberData = req.body;
+  let { first_name, last_name, email, username, password } = req.body;
 
   Members.add(memberData)
-  .then(newmember => {
-    res.status(201).json(newmember);
-  })
-  .catch(err => {
-    res.status(500).json({  message: 'Failed to create new member' });
-  });
+    .then(saved => {
+      if (first_name && last_name && email && username && password) {
+
+        res.status(201).json({
+          user: saved
+        });
+      }else {
+        res.status(404).json({ message: 'Please insert a email and a password' })
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
 });
 
 router.post('/login', (req, res) => {
