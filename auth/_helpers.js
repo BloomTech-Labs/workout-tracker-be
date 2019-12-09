@@ -13,7 +13,6 @@ function createUser (req) {
     username: req.body.username,
     password: hash
   })
-  .returning('*');
 }
 
 module.exports = {
