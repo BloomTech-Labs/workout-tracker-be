@@ -1,18 +1,9 @@
-// Update with your config settings.
-
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'pg',
     useNullAsDefault: true,
-    connection: {
-      filename: './database/firstrep.db3'
-    },
-  pool: {
-    afterCreate: (conn, done) => {
-      conn.run('PRAGMA foreign_keys = ON', done);
-    },
-  },
+    connection: 'postgres://pxkzipseqczmhb:ecb3d2a4587d92925304bc5fab1ea4306a22cb9bcf7add923facc0e2f392458a@ec2-107-21-226-44.compute-1.amazonaws.com:5432/d2uticatv8td1r?ssl=true',
   migrations: {
     directory: './database/migrations'
   },
@@ -22,7 +13,7 @@ module.exports = {
 },
 production: {
   client: 'pg',
-  connection: process.env.DATABASE_URL,
+  connection: 'postgres://pxkzipseqczmhb:ecb3d2a4587d92925304bc5fab1ea4306a22cb9bcf7add923facc0e2f392458a@ec2-107-21-226-44.compute-1.amazonaws.com:5432/d2uticatv8td1r?ssl=true',
   pool: {
     min: 2,
     max: 10,
@@ -37,7 +28,7 @@ production: {
   useNullAsDefault: true,
 },
 testing: {
-  client: 'sqlite3',
+  client: 'pg',
   connection: {
     filename: './database/test.db3'
   },
@@ -47,5 +38,3 @@ testing: {
   }
 }
 };
-
-

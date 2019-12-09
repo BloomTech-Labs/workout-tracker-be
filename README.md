@@ -57,6 +57,26 @@ To get the server running locally:
 | PUT    | `/api/memberstatus/:id` | owners         | Update member status with given ID.          |
 | DELETE | `/api/memberstatus/:id` | owners         | Delete member status with given ID.          |
 
+#### Routines Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/routines`     | owners         | Returns all routines.                  |
+| GET    | `/api/routines:id` | owners         | Returns a routine with given ID.          |
+| POST   | `/api/routines`     | owners         | Adds a new routine.                  |
+| PUT    | `/api/routines:id` | owners         | Updates routine with given ID.          |
+| DELETE | `/api/routines:id` | owners         | Deletes routine with given ID.          |
+
+#### RoutineExercises Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/routinesexercises`     | owners         | Returns all exercises tied to routines.                  |
+| GET    | `/api/routinesexercises:id` | owners         | Returns a exercise tied to a routine with given ID.          |
+| POST   | `/api/routinesexercises`     | owners         | Ties an exercise to a routine.                  |
+| PUT    | `/api/routinesexercises:id` | owners         | Updates exercise tied to routine with given ID.          |
+| DELETE | `/api/routinesexercises:id` | owners         | Deletes exercise tied to routine with given ID.          |
+
 # Data Model
 
 🚫This is just an example. Replace this with your data model
@@ -93,6 +113,27 @@ To get the server running locally:
   date: BOOLEAN
 }
 ```
+
+---
+
+#### ROUTINES
+
+| Column | Type                |  Description                                  |
+| ------ | ----------------------- | -------------------------------------------- |
+| id   | UUID    | Unique identifier automatically assigned by DB                  |
+| routine_name  | STRING | Not nullable. Name of routine          |
+| routine_description | STRING   | Not nullable. Description of the routine.                  |
+| member_id | INTEGER | Not nullable. Foreign key. Ties the routine to a member          |
+
+---
+
+#### ROUTINES EXERCISES
+
+| Column | Type                |  Description                                  |
+| ------ | ----------------------- | -------------------------------------------- |
+| id   | UUID    | Unique identifier automatically assigned by DB                  |
+| exercise_id  | INTEGER | Not nullable. ID of exercise from exrx to be added to routine          |
+| routine_id | STRING   | Not nullable. Foreign key. Ties exercise to routine                  |
 
 ## 2️⃣ Actions
 
