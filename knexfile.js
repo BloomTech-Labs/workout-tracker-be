@@ -44,10 +44,9 @@ production: {
   useNullAsDefault: true,
 },
 testing: {
-  client: 'pg',
-  connection: process.env.DATABASE_URL,
+  client: 'sqlite3',
   connection: {
-    database: 'test'
+    filename: './database/test.db3'
   },
   useNullAsDefault: true,
   migrations: {

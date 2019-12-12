@@ -6,7 +6,8 @@ const server = require('../api/server');
 describe('the routines model', () => {
 
     beforeEach(async () => {
-        await db.raw('TRUNCATE "routines" RESTART IDENTITY CASCADE;');
+        // await db.raw('TRUNCATE "routines" RESTART IDENTITY CASCADE;');
+        await db('routines').truncate();
     })
 
     describe('The get model', () => {

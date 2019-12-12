@@ -6,7 +6,8 @@ const server = require('../api/server');
 describe('the routines model', () => {
 
     beforeEach(async () => {
-        await db.raw('TRUNCATE "routine_exercises" RESTART IDENTITY CASCADE;');
+        // await db.raw('TRUNCATE "routine_exercises" RESTART IDENTITY CASCADE;');
+        await db('routine_exercises').truncate();
     })
 
     describe('The get model', () => {
@@ -38,7 +39,7 @@ describe('the routines model', () => {
             const routine = await RoutineExercises.add(data);
             const get = await RoutineExercises.findById(1);
 
-            expect(get).toEqual({"exercise_date": 1, "id": 1, "exercise_id": 1, "routine_id": 1})
+            expect(get).toEqual({ "id": 1, "exercise_id": 1, "routine_id": 1})
         })
     })
 
@@ -48,7 +49,7 @@ describe('the routines model', () => {
             const data = { exercise_id: 1, routine_id: 1 };
             const routine = await RoutineExercises.add(data);
 
-            expect(routine).toEqual({ id: 1, exercise_id: 1, routine_id: 1, exercise_date: 1 });
+            expect(routine).toEqual({ id: 1, exercise_id: 1, routine_id: 1 });
         })
 
         it('should return a status code of 201', async () => {
