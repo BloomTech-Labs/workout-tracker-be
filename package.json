@@ -10,7 +10,7 @@
   "scripts": {
     "server": "nodemon",
     "start": "node index.js",
-    "test": "cross-env DB_ENV=testing jest --watch"
+    "test": "cross-env NODE_ENV=testing jest --watch"
   },
   "jest": {
     "testEnvironment": "node"

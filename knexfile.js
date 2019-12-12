@@ -1,9 +1,19 @@
+// Update with your config settings.
+require("dotenv").config();
+const pg = require("pg");
+
 module.exports = {
 
   development: {
     client: 'pg',
     useNullAsDefault: true,
-    connection: 'postgres://pxkzipseqczmhb:ecb3d2a4587d92925304bc5fab1ea4306a22cb9bcf7add923facc0e2f392458a@ec2-107-21-226-44.compute-1.amazonaws.com:5432/d2uticatv8td1r?ssl=true',
+    connection: process.env.DATABASE_URL,
+    //ssl: true,
+    connection: {
+    database: 'firstrep'
+    //user:     process.env.DB_USER,
+    //password: process.env.DB_PASSWORD
+     },
   migrations: {
     directory: './database/migrations'
   },
@@ -13,7 +23,13 @@ module.exports = {
 },
 production: {
   client: 'pg',
-  connection: 'postgres://pxkzipseqczmhb:ecb3d2a4587d92925304bc5fab1ea4306a22cb9bcf7add923facc0e2f392458a@ec2-107-21-226-44.compute-1.amazonaws.com:5432/d2uticatv8td1r?ssl=true',
+  connection: process.env.DATABASE_URL,
+    //ssl: true,
+    connection: {
+    database: 'firstrep'
+    //user:     process.env.DB_USER,
+    //password: process.env.DB_PASSWORD
+     },
   pool: {
     min: 2,
     max: 10,
@@ -29,12 +45,13 @@ production: {
 },
 testing: {
   client: 'pg',
+  connection: process.env.DATABASE_URL,
   connection: {
-    filename: './database/test.db3'
+    database: 'test'
   },
   useNullAsDefault: true,
   migrations: {
     directory: './database/migrations'
-  }
+  },
 }
 };
