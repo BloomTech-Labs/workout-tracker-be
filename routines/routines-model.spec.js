@@ -6,8 +6,8 @@ const server = require('../api/server');
 describe('the routines model', () => {
 
     beforeEach(async () => {
-        // await db.raw('TRUNCATE "routines" RESTART IDENTITY CASCADE;');
-        await db('routines').truncate();
+        await db.raw('TRUNCATE "routines" RESTART IDENTITY CASCADE;');
+        // await db('routines').truncate(); //Only works for SQLite3. The above code is for Postgres
     })
 
     describe('The get model', () => {
@@ -19,7 +19,7 @@ describe('the routines model', () => {
         })
 
         it('Find should return an object', async () => {
-            const data = { routine_name: "Upper Body", routine_description: "Tri's and Bi's" };
+            const data = { routine_name: "Upper Test Body", routine_description: "Tri's and Bi's" };
             const routine = await Routines.add(data);
             const get = await Routines.find();
 

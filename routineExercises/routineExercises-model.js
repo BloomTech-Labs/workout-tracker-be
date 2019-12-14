@@ -17,7 +17,7 @@ function findById(id) {
 }
 
 function add(data) {
-    return db('routine_exercises').insert(data)
+    return db('routine_exercises').insert(data).returning('id')
         .then(newitem => {
             return findById(newitem[0]);
         });

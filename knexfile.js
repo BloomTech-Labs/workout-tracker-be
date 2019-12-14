@@ -44,9 +44,10 @@ production: {
   useNullAsDefault: true,
 },
 testing: {
-  client: 'sqlite3',
+  client: 'pg',
+  connection: 'postgres://username:chris@db:5400/test',
   connection: {
-    filename: './database/test.db3'
+    database: 'test'
   },
   useNullAsDefault: true,
   migrations: {
