@@ -11,6 +11,7 @@ const MembersRouter = require("../members/members-router");
 const MemberStatusRouter = require("../membersStatus/memberStatus-router");
 const routinesRouter = require("../routines/routines-router");
 const routinesExercisesRouter = require("../routineExercises/routineExercises-router");
+const memberExercises = require("../memberExercises/member-exercises-router")
 
 server.use(helmet());
 server.use(cors());
@@ -20,6 +21,7 @@ server.use("/api/members", MembersRouter);
 server.use("/api/memberstatus", MemberStatusRouter);
 server.use("/api/routines", routinesRouter);
 server.use("/api/routinesexercises", routinesExercisesRouter);
+server.use("/api/memberexercises", memberExercises);
 server.use(express.static(__dirname + "/../client/build/"));
 
 server.get("/", (req, res) => {
