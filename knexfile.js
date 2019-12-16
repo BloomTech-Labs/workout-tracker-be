@@ -29,6 +29,7 @@ production: {
 },
 testing: {
   client: 'pg',
+  connection: process.env.DATABASE_URL,
   connection: {
     filename: './database/test.db3'
   },

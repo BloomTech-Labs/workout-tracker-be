@@ -17,7 +17,7 @@ function findBydId(id) {
 }
 
 function add(user) {
-    return db('member_exercises').insert(user)
+    return db('member_exercises').insert(user).returning('id')
     .then(ids => {
         return findBydId(ids[0])
     });
