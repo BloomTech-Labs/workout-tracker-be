@@ -1,6 +1,6 @@
 const express = require('express');
 
-const memberRoutineRecords = require('./member-routine-records-model')
+const memberRoutineRecords = require('./memberRoutineRecords-model')
 
 const router = express.Router();
 
