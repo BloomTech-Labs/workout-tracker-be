@@ -12,7 +12,7 @@ const memberStatusRouter = require('../membersStatus/memberStatus-router')
 const routinesRouter = require('../routines/routines-router');
 const routinesExercisesRouter = require('../routineExercises/routineExercises-router')
 const memberRoutinesRecordsRouter = require('../memberRoutineRecords/memberRoutineRecords-router');
-const exerciseRecordsRouter = require('../exerciseRecords/memberRoutineRecords-router');
+const exerciseRecordsRouter = require('../exerciseRecords/exerciseRecords-router');
 
 server.use(helmet());
 server.use(cors());
