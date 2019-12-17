@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-    return knex.schema.createTable('exercise_record', tbl => {
+    return knex.schema.createTable('exercise_records', tbl => {
         tbl.increments();
         tbl.integer('exercise_id');
         tbl.integer('routine_id')
@@ -17,8 +17,8 @@ exports.up = function(knex) {
           .inTable('member_routine_record')
           .onDelete('CASCADE')
           .onUpdate('CASCADE');
-        tbl.integer('sets').notNullable();
-        tbl.integer('reps').notNullable();
+        tbl.decimal('sets').notNullable();
+        tbl.decimal('reps').notNullable();
         tbl.string('notes');
         tbl.timestamp('exercise_date').defaultTo(knex.fn.now());
     })
