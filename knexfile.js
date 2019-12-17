@@ -29,8 +29,9 @@ production: {
 },
 testing: {
   client: 'pg',
+  connection: process.env.DATABASE_URL,
   connection: {
-    filename: './database/test.db3'
+    database: 'test'
   },
   useNullAsDefault: true,
   migrations: {
