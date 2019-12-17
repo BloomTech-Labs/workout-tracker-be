@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     memberExercises.find()
   .then(memberExercises => {
-    res.json(memberExercises);
+    res.status.(200).json(memberExercises);
   })
   .catch (err => {
     res.status(500).json({ message: 'Failed to get exercise records' });
@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
   .then(memberExercises => {
 
     if (memberExercises) {
-      res.json(memberExercises);
+      res.status(200).json(memberExercises);
     } else {
       res.status(404).json({ message: 'Could not find the exercise record with that id.' })
     }
@@ -50,7 +50,7 @@ router.put('/:id', (req, res) => {
   memberExercises.update(id, changes)
   .then(memberExercises => {
     if (memberExercises) {
-      res.json({ update: memberExercises });
+      res.status(200).json({ update: memberExercises });
     } else {
       res.status(404).json({ message: 'Could not find an exercise record with that id' });
     }
