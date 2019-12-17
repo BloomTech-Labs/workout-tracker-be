@@ -14,7 +14,7 @@ exports.up = function(knex) {
           .notNullable()
           .unsigned()
           .references('id')
-          .inTable('member_routine_record')
+          .inTable('member_exercises')
           .onDelete('CASCADE')
           .onUpdate('CASCADE');
         tbl.decimal('sets').notNullable();
