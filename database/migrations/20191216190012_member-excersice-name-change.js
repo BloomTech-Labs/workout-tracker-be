@@ -1,8 +1,8 @@
 
 exports.up = function(knex) {
-  knex.schema.renameTable('member_exercises', 'member-routine-records')
+  knex.schema.renameTable('member_exercises', 'member_routine_records')
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTableIfExists('member-routine-records')
+    return knex.schema.dropTableIfExists('member_routine_records')
 };
