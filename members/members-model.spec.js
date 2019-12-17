@@ -6,7 +6,7 @@ const server = require('../api/server');
 describe('the members model', () => {
 
     beforeEach(async () => {
-        await db('member_table').truncate();
+        await db.raw('TRUNCATE "member_table" RESTART IDENTITY CASCADE;');
     })
 
     describe('The get model', () => {
