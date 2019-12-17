@@ -1,9 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+require("dotenv").config();
 
 const server = express();
+
+const passport = require("passport");
 
 const membersRouter = require('../members/members-router')
 const memberStatusRouter = require('../membersStatus/memberStatus-router')
@@ -15,6 +17,7 @@ const exerciseRecordsRouter = require('../exerciseRecords/memberRoutineRecords-r
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
+server.use(passport.initialize());
 
 server.use('/api/members', membersRouter);
 server.use('/api/memberstatus', memberStatusRouter);
