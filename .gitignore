@@ -78,3 +78,6 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Yarn.lock file since it causes errors when yarn and npm is used
+yarn.lock
