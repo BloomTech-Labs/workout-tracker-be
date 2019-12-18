@@ -6,7 +6,7 @@ const server = require('../api/server');
 describe('the memberRoutineRecords model', () => {
 
   beforeEach(async () => {
-    await db.raw('TRUNCATE "member_exercises" RESTART IDENTITY CASCADE;');
+    await db.raw('TRUNCATE "member_routine_records" RESTART IDENTITY CASCADE;');
   })
 
   describe('The get model', () => {
@@ -22,7 +22,7 @@ describe('the memberRoutineRecords model', () => {
         member_id: 1,
         routine_id: 1
       };
-      const member_exercise = await memberRoutineRecords
+      const memberRoutineRecord = await memberRoutineRecords
         .add(data);
       const res = await request(server).get('api/memberRoutineRecords')
 
@@ -34,7 +34,7 @@ describe('the memberRoutineRecords model', () => {
         member_id: 1,
         routine_id: 1
       };
-      const member_exercise = await memberRoutineRecords
+      const memberRoutineRecord = await memberRoutineRecords
         .add(data);
       const res = await request(server).get('api/memberRoutineRecords/1')
 
@@ -46,7 +46,7 @@ describe('the memberRoutineRecords model', () => {
         member_id: 1,
         routine_id: 1
       };
-      const member_exercise = await memberRoutineRecords
+      const memberRoutineRecord = await memberRoutineRecords
         .add(data);
       const res = await request(server).get('api/memberRoutineRecords/1')
 
