@@ -1,13 +1,13 @@
 const express = require('express');
 
-const memberExercises = require('./member-exercises-model')
+const memberRoutineRecords = require('./memberRoutineRecords-model')
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    memberExercises.find()
-  .then(memberExercises => {
-    res.json(memberExercises);
+    memberRoutineRecords.find()
+  .then(memberRoutineRecords => {
+    res.status(200).json(memberRoutineRecords);
   })
   .catch (err => {
     res.status(500).json({ message: 'Failed to get exercise records' });
@@ -17,11 +17,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
-  memberExercises.findBydId(id)
-  .then(memberExercises => {
+  memberRoutineRecords.findBydId(id)
+  .then(memberRoutineRecords => {
 
-    if (memberExercises) {
-      res.json(memberExercises);
+    if (memberRoutineRecords) {
+      res.status(200).json(memberRoutineRecords);
     } else {
       res.status(404).json({ message: 'Could not find the exercise record with that id.' })
     }
@@ -34,9 +34,9 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const memberExerciseData = req.body;
 
-  memberExercises.add(memberExerciseData)
+  memberRoutineRecords.add(memberExerciseData)
   .then(newMemberExercise => {
-    res.status(201).json(newMemberExercise);
+    res.status(200).json(newMemberExercise);
   })
   .catch(err => {
     res.status(500).json({ message: 'Failed to create new exercise record' });
@@ -47,10 +47,10 @@ router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
-  memberExercises.update(id, changes)
-  .then(memberExercises => {
-    if (memberExercises) {
-      res.json({ update: memberExercises });
+  memberRoutineRecords.update(id, changes)
+  .then(memberRoutineRecords => {
+    if (memberRoutineRecords) {
+      res.status(200).json({ update: memberRoutineRecords });
     } else {
       res.status(404).json({ message: 'Could not find an exercise record with that id' });
     }
@@ -63,10 +63,10 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
-  memberExercises.remove(id)
+  memberRoutineRecords.remove(id)
   .then(count => {
     if (count) {
-      res.json({ removed: count });
+      res.status(200).json({ removed: count });
     } else {
       res.status(404).json({ message: 'Could not find the exercise record with that id' });
     }
