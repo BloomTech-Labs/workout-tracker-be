@@ -10,7 +10,7 @@
   "scripts": {
     "server": "nodemon",
     "start": "node index.js",
-    "test": "cross-env DB_ENV=testing jest --watch"
+    "test": "cross-env NODE_ENV=testing jest --watch"
   },
   "jest": {
     "testEnvironment": "node"
@@ -27,11 +27,18 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "0.19.5",
     "mime": "1.4.1",
+<<<<<<< HEAD
     "node": "^12.13.1",
     "node.js": "^0.0.0",
     "path": "^0.12.7",
     "pg": "^7.15.0",
     "sqlite3": "^4.1.0",
+=======
+    "node": "^13.3.0",
+    "path": "^0.12.7",
+    "pg": "^7.14.0",
+    "sqlite3": "^4.1.1",
+>>>>>>> d9278285dbfda429b264574b45b13711490f584d
     "supertest": "^4.0.2"
   },
   "devDependencies": {},
