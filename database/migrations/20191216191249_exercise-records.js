@@ -2,7 +2,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('exercise_records', tbl => {
         tbl.increments();
-        tbl.integer('exercise_id');
+        tbl.integer('exercise_id')
         tbl.integer('routine_id')
           .notNullable()
           .unsigned()
