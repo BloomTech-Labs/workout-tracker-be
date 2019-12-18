@@ -4,7 +4,9 @@ const MemberStatus = require('./memberStatus-model')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+const passport = require("passport");
+
+router.get('/', router.use(passport.authenticate("jwt", { session: false })), (req, res) => {
     MemberStatus.find()
     .then(MemberStatus => {
         res.json(MemberStatus);
@@ -14,7 +16,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', router.use(passport.authenticate("jwt", { session: false })), (req, res) => {
     const { id } = req.params;
 
     MemberStatus.findById(id)
@@ -27,7 +29,7 @@ router.get('/:id', (req, res) => {
         }
     })
     .catch(err => {
-        res.status(500).json({ message: 'Failed to get member status' })
+        res.status(500).json({ message: 'Failed to get member status ' })
     });
 });
 
@@ -43,7 +45,7 @@ router.post('/', (req, res) => {
     })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', router.use(passport.authenticate("jwt", { session: false })), (req, res) => {
     const { id } = req.params;
     const changes = req.body;
 
@@ -60,7 +62,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', router.use(passport.authenticate("jwt", { session: false })), (req, res) => {
     const { id } = req.params;
 
     MemberStatus.remove(id)
