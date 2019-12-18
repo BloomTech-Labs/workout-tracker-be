@@ -4,6 +4,10 @@ const RoutinesExercises = require('./routineExercises-model');
 
 const router = express.Router();
 
+const passport = require("passport");
+
+router.use(passport.authenticate("jwt", { session: false }));
+
 router.get('/', (req, res) => {
     RoutinesExercises.find()
         .then(routines => {
