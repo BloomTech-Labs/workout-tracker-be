@@ -7,23 +7,31 @@ const server = express();
 
 const passport = require("passport");
 
-const MembersRouter = require("../members/members-router");
-const MemberStatusRouter = require("../membersStatus/memberStatus-router");
-const routinesRouter = require("../routines/routines-router");
-const routinesExercisesRouter = require("../routineExercises/routineExercises-router");
+
+const membersRouter = require('../members/members-router')
+const memberStatusRouter = require('../membersStatus/memberStatus-router')
+const routinesRouter = require('../routines/routines-router');
+const routinesExercisesRouter = require('../routineExercises/routineExercises-router')
+const memberRoutinesRecordsRouter = require('../memberRoutineRecords/memberRoutineRecords-router');
+const exerciseRecordsRouter = require('../exerciseRecords/exerciseRecords-router');
+
 
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 server.use(passport.initialize());
-server.use("/api/members", MembersRouter);
-server.use("/api/memberstatus", MemberStatusRouter);
-server.use("/api/routines", routinesRouter);
-server.use("/api/routinesexercises", routinesExercisesRouter);
-server.use(express.static(__dirname + "/../client/build/"));
 
-server.get("/", (req, res) => {
-  res.send("I guess it's working!");
+server.use('/api/members', membersRouter);
+server.use('/api/memberstatus', memberStatusRouter);
+server.use('/api/routines', routinesRouter);
+server.use('/api/routinesexercises', routinesExercisesRouter);
+server.use('/api/memberRoutineRecords', memberRoutinesRecordsRouter);
+server.use('/api/exerciseRecords', exerciseRecordsRouter)
+server.use(express.static(__dirname + '/../client/build/'));
+
+server.get('/', (req, res) => {
+    res.send("I guess it's working!")
+
 });
 
 module.exports = server;

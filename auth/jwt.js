@@ -3,7 +3,9 @@ const Members = require("../members/members-model");
 const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+
 opts.secretOrKey = process.env.JWT_SECRET;
+
 // //opts.issuer = "accounts.examplesoft.com";
 // opts.audience = "yoursite.net";
 // ff
