@@ -14,7 +14,7 @@ const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
-router.use(passport.authenticate("jwt", { session: false }));
+// router.use(passport.authenticate("jwt", { session: false }));
 
 router.get("/", (req, res) => {
   Members.find()
