@@ -30,9 +30,9 @@ function findStatus(member_id) {
 }
 
 function add(user) {
-    return db('member_table').insert(user)
+    return db('member_table').insert(user).returning('id')
     .then(ids => {
-        return "Member added successfully"
+        return findById(newitem[0]);
     });
 }
 
