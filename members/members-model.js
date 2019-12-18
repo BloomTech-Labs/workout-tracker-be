@@ -25,14 +25,14 @@ function findBydId(id) {
 function findStatus(member_id) {
     return db('member_status as s')
         .join('member_table as m', 'm.id', 's.member_id')
-        .select('s.id', 'm.first_name', 's.weight', 's.height', 's.bmi', 's.bench_max', 's.squat_max', 's.mile_time', 's.exercise_date')
+        .select('s.id', 'm.first_name', 's.weight', 's.height', 's.bmi', 's.bench_max', 's.squat_max', 's.mile_time', 's.date')
         .where({ member_id })
 }
 
 function add(user) {
     return db('member_table').insert(user).returning('id')
     .then(ids => {
-        return findById(newitem[0]);
+        return findBydId(ids[0])
     });
 }
 
