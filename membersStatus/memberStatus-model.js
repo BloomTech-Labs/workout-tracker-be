@@ -17,7 +17,7 @@ function findById(id) {
 }
 
 function add(status) {
-    return db('member_status').insert(status)
+    return db('member_status').insert(status).returning('id')
     .then(ids => {
         return findById(ids[0])
     });
