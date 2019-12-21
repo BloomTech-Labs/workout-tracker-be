@@ -24,7 +24,10 @@ function add(record) {
 }
 
 function update(id, changes) {
-    return db('member_routine_records').where({ id }).update(changes);
+    return db('member_routine_records').where({ id }).update(changes)
+        .then(update => {
+            return findBydId(1);
+        })
 }
 
 function remove(id) {
