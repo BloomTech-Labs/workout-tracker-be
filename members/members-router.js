@@ -8,6 +8,7 @@ const Status = require("../membersStatus/memberStatus-model");
 
 require("../auth/jwt");
 require("../auth/local");
+require("../auth/google");
 const passport = require("passport");
 
 const jwt = require("jsonwebtoken");
@@ -102,6 +103,25 @@ router.post(
       });
   }
 );
+
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
+router.get("/logout", (req, res) => {
+  res.send("logging out");
+});
+
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile"]
+  })
+);
+
+router.get("/google/redirect", (req, res) => {
+  res.send("You've reached call back uri");
+});
 
 router.put("/:id", (req, res) => {
   const { id } = req.params;
