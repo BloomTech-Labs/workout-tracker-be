@@ -8,9 +8,11 @@ const Status = require("../membersStatus/memberStatus-model");
 
 require("../auth/jwt");
 require("../auth/local");
+
 const passport = require("passport");
 
 const jwt = require("jsonwebtoken");
+const secrets = require("../config/secrets");
 
 const router = express.Router();
 
@@ -83,7 +85,7 @@ router.post(
       firstName: first_name
     };
 
-    jwt.sign(payload, "secret", { expiresIn: 3000 }, (err, token) => {
+    jwt.sign(payload, secrets.jwtSecret, { expiresIn: 3000 }, (err, token) => {
       if (err) {
         return res.json({ err });
       }
