@@ -104,23 +104,19 @@ router.post(
   }
 );
 
-router.get("/login", (req, res) => {
-  res.render("login");
-});
-
-router.get("/logout", (req, res) => {
-  res.send("logging out");
-});
-
 router.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["profile"]
+  "/login/google",
+  passport.authenticate('google', {
+    session: false, scope: ['openid', 'profile', 'email']
   })
 );
 
-router.get("/google/redirect", (req, res) => {
-  res.send("You've reached call back uri");
+// router.get("/login/google", (req, res) => {
+//   res.send("signing in with google")
+// });
+
+router.get("/google/redirect", passport.authenticate('google', { session: false }), (req, res) => {
+  res.redirect('/')
 });
 
 router.put("/:id", (req, res) => {

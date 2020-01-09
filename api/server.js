@@ -6,7 +6,7 @@ require("dotenv").config();
 const server = express();
 
 const passport = require("passport");
-
+require("../auth/google");
 
 const membersRouter = require('../members/members-router')
 const memberStatusRouter = require('../membersStatus/memberStatus-router')
