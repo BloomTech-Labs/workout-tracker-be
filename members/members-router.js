@@ -116,7 +116,18 @@ router.get(
 // });
 
 router.get("/google/redirect", passport.authenticate('google', { session: false }), (req, res) => {
-  res.redirect('/')
+  const { id, first_name } = req.user;
+  const payload = {
+    id,
+    firstName: first_name
+  };
+  jwt.sign(payload, "secret", { expiresIn: 3000 }, (err, token) => {
+    if (err) {
+      return res.json({ err });
+    }
+    return res.json({ token });
+  });
+  res.redirect('http://localhost:3000/profile')
 });
 
 router.put("/:id", (req, res) => {
