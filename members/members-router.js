@@ -125,7 +125,7 @@ router.get("/google/redirect", passport.authenticate('google', { session: false 
     if (err) {
       return res.json({ err });
     }
-    return res.json({ token });
+    return res.json({ token, payload });
   });
   res.redirect('http://localhost:3000/profile')
 });

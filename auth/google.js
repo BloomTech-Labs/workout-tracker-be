@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const helpers = require('./_helpers');
 const User = require('../members/members-model');
 
 passport.use(new GoogleStrategy({
@@ -18,7 +19,7 @@ passport.use(new GoogleStrategy({
                 console.log('create')
                 const data = { first_name: profile.name.givenName, last_name: profile.name.familyName, email: profile.emails[0].value, username: profile.id, password: profile.id}
                 
-                User.add(data)
+                helpers.createUser(data);
             }
             return done(null, user)
       })
