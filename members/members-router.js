@@ -3,31 +3,36 @@ const express = require("express");
 const Members = require("./members-model");
 
 const helpers = require("../auth/_helpers");
-
+const keys = require("../auth/keys");
 const Status = require("../membersStatus/memberStatus-model");
 
 require("../auth/jwt");
 require("../auth/local");
-require("../auth/google");
 const passport = require("passport");
 
 const jwt = require("jsonwebtoken");
+const secrets = require("../config/secrets");
 
 const router = express.Router();
 
-
 // router.use(passport.authenticate("jwt", { session: false }));
 
-
-router.get("/", (req, res) => {
-  Members.find()
-    .then(members => {
-      res.json(members);
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to get members" });
-    });
-});
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Members.find()
+      .then(members => {
+        if (!members) {
+          return res.status(404).json({ error: "Cant find users " });
+        }
+        res.json(members);
+      })
+      .catch(err => {
+        res.status(500).json({ message: "Failed to get members", error: err });
+      });
+  }
+);
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
@@ -79,7 +84,7 @@ router.post(
       firstName: first_name
     };
 
-    jwt.sign(payload, "secret", { expiresIn: 3000 }, (err, token) => {
+    jwt.sign(payload, secrets.jwtSecret, { expiresIn: 3000 }, (err, token) => {
       if (err) {
         return res.json({ err });
       }
