@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-  return knex.schema.createTable('member_exercises', tbl => {
+  return knex.schema.createTable('member_routine_records', tbl => {
     tbl.increments();
     tbl.integer('member_id')
       .unsigned()
@@ -16,11 +16,11 @@ exports.up = function(knex) {
       .inTable('routines')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
-    tbl.integer('date')
+      tbl.timestamp('date').defaultTo(knex.fn.now());
 })
 };
 
 exports.down = function(knex) {
   return knex.schema
-        .dropTableIfExists('member_exercises')
+        .dropTableIfExists('member_routine_records')
 };
