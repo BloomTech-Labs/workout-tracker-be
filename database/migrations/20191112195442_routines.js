@@ -13,7 +13,7 @@ exports.up = function(knex) {
   })
   .createTable('routine_exercises', tbl => {
       tbl.increments();
-      tbl.integer('exercise_id').notNullable();
+      tbl.integer('exercise_id')
       tbl.integer('routine_id')
         .notNullable()
         .unsigned()

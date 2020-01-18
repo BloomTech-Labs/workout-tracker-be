@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.get(
   "/",
-  passport.authenticate("jwt", { session: false }),
+
   (req, res) => {
     Members.find()
       .then(members => {
