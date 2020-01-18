@@ -5,11 +5,7 @@ const opts = {};
 const keys = require("../auth/keys");
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 
-<<<<<<< HEAD
-opts.secretOrKey = 'secret';
-=======
 opts.secretOrKey = "process.env.JWT_SECRET";
->>>>>>> f0f63fcf5d922832ea272dd6cf2129a21b5b15ee
 
 // //opts.issuer = "accounts.examplesoft.com";
 // opts.audience = "yoursite.net";
