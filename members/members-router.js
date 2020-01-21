@@ -89,24 +89,26 @@ router.post(
       if (err) {
         return res.json({ err });
       }
-      return res.json({ token });
-    });
-    //return res.json(req.user);
-    let { username, password } = req.body;
-    Members.findBy({ username })
+      // Get member
+      let { username, password } = req.body;
+      Members.findBy({ username })
       .first()
       .then(user => {
         if (username && password) {
-          res.status(200).json({
-            message: `Welcome ${user.first_name}!`
+          return res.status(200).json({
+            message: `Welcome ${user.first_name}!`,
+            userId: user.id,
+            token
           });
         } else {
-          res.status(401).json({ message: "Invalid Credentials" });
+          return res.status(401).json({ message: "Invalid Credentials" });
         }
       })
       .catch(error => {
         res.status(500).json(error);
       });
+    });
+    //return res.json(req.user);
   }
 );
 
