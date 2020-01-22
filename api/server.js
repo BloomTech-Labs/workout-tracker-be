@@ -15,7 +15,7 @@ const routinesExercisesRouter = require('../routineExercises/routineExercises-ro
 const memberRoutinesRecordsRouter = require('../memberRoutineRecords/memberRoutineRecords-router');
 const exerciseRecordsRouter = require('../exerciseRecords/exerciseRecords-router');
 const exrxAPI = require('../exrxAPI/request-router');
-
+const RoutinesFavorites = require('../routineFavorites/routineFavorites-router');
 
 server.use(helmet());
 server.use(cors());
@@ -29,6 +29,7 @@ server.use('/api/routinesexercises', routinesExercisesRouter);
 server.use('/api/memberRoutineRecords', memberRoutinesRecordsRouter);
 server.use('/api/exerciseRecords', exerciseRecordsRouter);
 server.use('/api/exrx', exrxAPI);
+server.use('/api/favorites', RoutinesFavorites);
 server.use(express.static(__dirname + '/../client/build/'));
 
 server.get('/', (req, res) => {
