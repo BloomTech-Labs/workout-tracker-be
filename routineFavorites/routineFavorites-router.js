@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/members/:id", (req, res) => {
+router.get("/member/:id", (req, res) => {
   const { id } = req.params;
 
   RoutinesFavorites.findByMember(id)
@@ -33,9 +33,7 @@ router.get("/members/:id", (req, res) => {
       }
     })
     .catch(err => {
-      res.status(500).json({
-        message: "Failed to get favorites"
-      });
+      res.status(500).json(err);
     });
 });
 
@@ -44,20 +42,22 @@ router.post("/", (req, res) => {
 
   RoutinesFavorites.add(favoriteData)
     .then(newFavorite => {
-      res.status(201).json(newFavorite);
+      res.status(201).json({
+        message: 'Successfully added to favorites'
+      });
     })
     .catch(err => {
       res.status(500).json({
-        message: "Failed to add routine to favorites"
+        message: err
       });
     });
 });
 
-router.delete("/members/:id/exercise/:exerciseid", (req, res) => {
+router.delete("/member/:id/routine/:routineId", (req, res) => {
   const { id } = req.params;
-  console.log(req.params)
+  const { routineId } = req.params;
 
-  RoutinesFavorites.remove(id)
+  RoutinesFavorites.remove(id, routineId)
     .then(count => {
       if (count) {
         res.json({

@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('routine_favorites', tbl => {
-      tbl.integer('member_id')
+      tbl.integer('user_id')
         .unsigned()
         .notNullable()
         .references('id')
@@ -15,7 +15,7 @@ exports.up = function(knex) {
         .inTable('routines')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
-      tbl.primary(['member_id', 'routine_id'])
+      tbl.primary(['user_id', 'routine_id'])
     })
   };
   
