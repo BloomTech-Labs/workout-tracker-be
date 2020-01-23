@@ -112,6 +112,15 @@ router.post(
   }
 );
 
+router.get(
+  "/logout",
+  passport.authenticate("local", { session: false }),
+  (req, res) => {
+    req.session.destroy(function (err) {
+    res.redirect('/');
+  }
+);
+
 router.put("/:id", (req, res) => {
   const { id } = req.params;
   const changes = req.body;
