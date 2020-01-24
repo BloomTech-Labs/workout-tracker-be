@@ -29,8 +29,31 @@ router.get('/:id', (req, res) => {
                         const searchRequest = exercises.map(object => object.exercise_id)
                         console.log(searchRequest);
                         // res.send({ routine, exercises: exercises })
-                        request.post('http://127.0.0.1:4000/api/exrx/').form({search: searchRequest}).on('response', function(response) {
-                            console.log(response.statusCode)
+                        const options = {
+                            method: 'POST',
+                            uri: 'http://127.0.0.1:4000/api/exrx/',
+                            body: {
+                                search: searchRequest
+                            },
+                            json: true
+                        }
+
+                        function callback(error, response, body) {
+                            if (error) {
+                                res.status(response.statusCode).json({
+                                    message: error
+                                })
+                            } else if (body.success == false) {
+                                res.status(401).json({
+                                    message: body.message
+                                });
+                            } else {
+                                res.send({ routine, exercises: body});
+                                console.log(body)
+                            }
+                        }
+                        request(options, callback).on('response', function(response, body) {
+                            console.log(response.message)
                         })
                         
                     })

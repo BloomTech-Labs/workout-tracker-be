@@ -21,10 +21,10 @@ router.post("/", async(req, res) => {
                 })
             })
             
-            const searchRequest = object.values(req.body.search);
+            const searchRequest = req.body.search;
 
             const getURL = {
-                url: Number(searchRequest) ? `http://204.235.60.194/exrxapi/v1/allinclusive/exercises?exerciseids=${searchRequest}` : `http://204.235.60.194/exrxapi/v1/allinclusive/exercises?exercisename=${searchRequest}`,
+                url: Number(searchRequest[0]) ? `http://204.235.60.194/exrxapi/v1/allinclusive/exercises?exerciseids=[${searchRequest}]` : `http://204.235.60.194/exrxapi/v1/allinclusive/exercises?exercisename=${searchRequest}`,
                 headers: {
                     "Content-type": "application/json",
                     "User-Agent": process.env.EXRX_USER_AGENT,
@@ -48,6 +48,7 @@ router.post("/", async(req, res) => {
                     });
                 } else {
                     res.send(body);
+                    console.log(body)
                 }
             }
 
@@ -58,10 +59,11 @@ router.post("/", async(req, res) => {
                 message: "missing a search parameter"
             })
         }
-    } catch {
+    } catch (err) {
         res.status(500).json({
             message: "Failed to get exercises"
         })
+        console.log(err);
     }
 });
 
