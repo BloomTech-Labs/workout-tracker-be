@@ -1,7 +1,8 @@
 const express = require('express');
 
 const Routines = require('./routines-model');
-
+const RoutineExercises = require('../routineExercises/routineExercises-model');
+const request = require('request');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -23,7 +24,16 @@ router.get('/:id', (req, res) => {
         .then(routine => {
             
             if (routine) {
-                res.json(routine)
+                RoutineExercises.findByRoutine(id)
+                    .then(exercises => {
+                        const searchRequest = exercises.map(object => object.exercise_id)
+                        console.log(searchRequest);
+                        // res.send({ routine, exercises: exercises })
+                        request.post('http://127.0.0.1:4000/api/exrx/').form({search: searchRequest}).on('response', function(response) {
+                            console.log(response.statusCode)
+                        })
+                        
+                    })
             } else {
                 res.status(404).json({
                     message: 'Could not find routine with given id'

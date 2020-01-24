@@ -21,10 +21,10 @@ router.post("/", async(req, res) => {
                 })
             })
             
-            const searchRequest = req.body.search;
+            const searchRequest = object.values(req.body.search);
 
             const getURL = {
-                url: Number(searchRequest) ? `http://204.235.60.194/exrxapi/v1/allinclusive/exercises?exerciseids=[${searchRequest}]` : `http://204.235.60.194/exrxapi/v1/allinclusive/exercises?exercisename=${searchRequest}`,
+                url: Number(searchRequest) ? `http://204.235.60.194/exrxapi/v1/allinclusive/exercises?exerciseids=${searchRequest}` : `http://204.235.60.194/exrxapi/v1/allinclusive/exercises?exercisename=${searchRequest}`,
                 headers: {
                     "Content-type": "application/json",
                     "User-Agent": process.env.EXRX_USER_AGENT,
@@ -34,7 +34,7 @@ router.post("/", async(req, res) => {
                     "Authorization": "Bearer " + bearer.token
                 }
             }
-
+            console.log(getURL)
             function callback(error, response, body) {
                 body = JSON.parse(body)
             
@@ -52,6 +52,7 @@ router.post("/", async(req, res) => {
             }
 
             const getRequest = await request(getURL, callback);
+            console.log(getURL)
         } else {
             res.status(400).json({
                 message: "missing a search parameter"
