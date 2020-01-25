@@ -39,11 +39,8 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/:id", (req, res) => {
-  const { id } = req.params
-  const data = req.body.exercise_id
-  const routineData = { exercise_id: data, routine_id: id };
-  console.log(routineData)
+router.post("/", (req, res) => {
+  const routineData = req.body;
 
   RoutinesExercises.add(routineData)
     .then(newRoutine => {
