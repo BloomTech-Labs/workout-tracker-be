@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
                         // res.send({ routine, exercises: exercises })
                         const options = {
                             method: 'POST',
-                            uri: 'https://firstrep.herokuapp.com/api/exrx/',
+                            uri: 'http://127.0.0.1:4000/api/exrx/',
                             body: {
                                 search: searchRequest
                             },
