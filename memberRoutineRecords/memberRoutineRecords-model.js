@@ -17,17 +17,14 @@ function findBydId(id) {
 }
 
 function add(record) {
-    return db('member_routine_records').insert(record).returning('id')
+    return db('member_routine_records').insert(record)
     .then(ids => {
         return findBydId(ids[0])
     });
 }
 
 function update(id, changes) {
-    return db('member_routine_records').where({ id }).update(changes)
-        .then(update => {
-            return findBydId(1);
-        })
+    return db('member_routine_records').where({ id }).update(changes);
 }
 
 function remove(id) {
