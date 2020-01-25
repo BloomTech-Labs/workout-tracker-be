@@ -8,6 +8,7 @@ const Status = require("../membersStatus/memberStatus-model");
 
 require("../auth/jwt");
 require("../auth/local");
+require("../auth/google");
 const passport = require("passport");
 
 const jwt = require("jsonwebtoken");
