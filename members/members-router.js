@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.get(
   "/",
-
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Members.find()
       .then(members => {
@@ -89,26 +89,24 @@ router.post(
       if (err) {
         return res.json({ err });
       }
-      // Get member
-      let { username, password } = req.body;
-      Members.findBy({ username })
+      return res.json({ token });
+    });
+    //return res.json(req.user);
+    let { username, password } = req.body;
+    Members.findBy({ username })
       .first()
       .then(user => {
         if (username && password) {
-          return res.status(200).json({
-            message: `Welcome ${user.first_name}!`,
-            userId: user.id,
-            token
+          res.status(200).json({
+            message: `Welcome ${user.first_name}!`
           });
         } else {
-          return res.status(401).json({ message: "Invalid Credentials" });
+          res.status(401).json({ message: "Invalid Credentials" });
         }
       })
       .catch(error => {
         res.status(500).json(error);
       });
-    });
-    //return res.json(req.user);
   }
 );
 
