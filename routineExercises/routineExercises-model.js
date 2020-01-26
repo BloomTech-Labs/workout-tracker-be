@@ -3,7 +3,6 @@ const db = require('../database/db-config')
 module.exports = {
     find,
     findById,
-    findByRoutine,
     add,
     update,
     remove
@@ -15,12 +14,6 @@ function find() {
 
 function findById(id) {
     return db('routine_exercises').where({ id }).first();
-}
-
-function findByRoutine(routine_id) {
-    return db('routine_exercises')
-        .select('exercise_id')
-        .where({ routine_id })
 }
 
 function add(data) {
