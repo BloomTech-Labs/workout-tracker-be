@@ -8,7 +8,7 @@ const Status = require("../membersStatus/memberStatus-model");
 
 require("../auth/jwt");
 require("../auth/local");
-require("../auth/google");
+// require("../auth/google");
 const passport = require("passport");
 
 const jwt = require("jsonwebtoken");
@@ -110,31 +110,31 @@ router.post(
   }
 );
 
-router.get(
-  "/login/google",
-  passport.authenticate('google', {
-    session: false, scope: ['openid', 'profile', 'email']
-  })
-);
+// router.get(
+//   "/login/google",
+//   passport.authenticate('google', {
+//     session: false, scope: ['openid', 'profile', 'email']
+//   })
+// );
 
 // router.get("/login/google", (req, res) => {
 //   res.send("signing in with google")
 // });
 
-router.get("/google/redirect", passport.authenticate('google', { session: false }), (req, res) => {
-  const { id, first_name } = req.user;
-  const payload = {
-    id,
-    firstName: first_name
-  };
-  jwt.sign(payload, "secret", { expiresIn: 3000 }, (err, token) => {
-    if (err) {
-      return res.json({ err });
-    }
-    return res.json({ token, payload });
-  });
-  res.redirect('http://localhost:3000/profile')
-});
+// router.get("/google/redirect", passport.authenticate('google', { session: false }), (req, res) => {
+//   const { id, first_name } = req.user;
+//   const payload = {
+//     id,
+//     firstName: first_name
+//   };
+//   jwt.sign(payload, "secret", { expiresIn: 3000 }, (err, token) => {
+//     if (err) {
+//       return res.json({ err });
+//     }
+//     return res.json({ token, payload });
+//   });
+//   res.redirect('http://localhost:3000/profile')
+// });
 
 router.put("/:id", (req, res) => {
   const { id } = req.params;
