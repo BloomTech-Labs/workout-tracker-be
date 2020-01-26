@@ -117,10 +117,6 @@ router.post(
 //   })
 // );
 
-// router.get("/login/google", (req, res) => {
-//   res.send("signing in with google")
-// });
-
 // router.get("/google/redirect", passport.authenticate('google', { session: false }), (req, res) => {
 //   const { id, first_name } = req.user;
 //   const payload = {
