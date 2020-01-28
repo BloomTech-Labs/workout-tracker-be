@@ -32,8 +32,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/:id', (req, res) => {
-  const { id } = req.params
-  const post = req.body
+  const { id } = req.params;
+  const post = req.body;
   const memberExerciseData = { routine_id: id, post };
 
   exerciseRecords.add(memberExerciseData)
