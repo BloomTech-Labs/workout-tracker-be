@@ -39,16 +39,19 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
-  const routineData = req.body;
+router.post("/:id", (req, res) => {
+  const { id } = req.params;
+  const data = req.body.exercise_id;
+  const routineData = { exercise_id: data, routine_id: id };
 
   RoutinesExercises.add(routineData)
     .then(newRoutine => {
       res.status(201).json(newRoutine);
     })
     .catch(err => {
+      console.log(req.body);
       res.status(500).json({
-        message: "Failed to create new exercise routine"
+        message: req.body
       });
     });
 });

@@ -8,7 +8,7 @@ const Status = require("../membersStatus/memberStatus-model");
 
 require("../auth/jwt");
 require("../auth/local");
-
+// require("../auth/google");
 const passport = require("passport");
 
 const jwt = require("jsonwebtoken");
@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.get(
   "/",
-
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Members.find()
       .then(members => {
@@ -89,28 +89,48 @@ router.post(
       if (err) {
         return res.json({ err });
       }
-      // Get member
-      let { username, password } = req.body;
-      Members.findBy({ username })
+      return res.json({ token });
+    });
+    //return res.json(req.user);
+    let { username, password } = req.body;
+    Members.findBy({ username })
       .first()
       .then(user => {
         if (username && password) {
-          return res.status(200).json({
-            message: `Welcome ${user.first_name}!`,
-            userId: user.id,
-            token
+          res.status(200).json({
+            message: `Welcome ${user.first_name}!`
           });
         } else {
-          return res.status(401).json({ message: "Invalid Credentials" });
+          res.status(401).json({ message: "Invalid Credentials" });
         }
       })
       .catch(error => {
         res.status(500).json(error);
       });
-    });
-    //return res.json(req.user);
   }
 );
+
+// router.get(
+//   "/login/google",
+//   passport.authenticate('google', {
+//     session: false, scope: ['openid', 'profile', 'email']
+//   })
+// );
+
+// router.get("/google/redirect", passport.authenticate('google', { session: false }), (req, res) => {
+//   const { id, first_name } = req.user;
+//   const payload = {
+//     id,
+//     firstName: first_name
+//   };
+//   jwt.sign(payload, "secret", { expiresIn: 3000 }, (err, token) => {
+//     if (err) {
+//       return res.json({ err });
+//     }
+//     return res.json({ token, payload });
+//   });
+//   res.redirect('http://localhost:3000/profile')
+// });
 
 router.put("/:id", (req, res) => {
   const { id } = req.params;
