@@ -33,10 +33,11 @@ router.get('/:id', (req, res) => {
 
 router.post('/:id', (req, res) => {
   const { id } = req.params;
-  const post = req.body.exercise_id;
-  const memberExerciseData = { routine_id: id, exercise_id: post };
+  const post = req.body;
+  const exercises = req.body.exercise_id;
+  const memberExerciseData = { routine_id: id, ...post };
 
-  if(Number(post)) {
+  if(Number(exercises)) {
 
   exerciseRecords.add(memberExerciseData)
   .then(newMemberExercise => {
@@ -47,8 +48,8 @@ router.post('/:id', (req, res) => {
   });
 
 } else {
-  post.foreach(function(exercise) {
-    const exerciseData = { exercise_id: exercise, routine_id: id }
+  exercises.foreach(function(exercise) {
+    const exerciseData = { exercise_id: exercise, ...post }
     exerciseRecords.add(exerciseData)
       .then(newRecord => {
         res.status(201).json({
