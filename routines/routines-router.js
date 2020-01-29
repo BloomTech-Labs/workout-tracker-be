@@ -27,8 +27,6 @@ router.get('/:id', (req, res) => {
                 RoutineExercises.findByRoutine(id)
                     .then(exercises => {
                         const searchRequest = exercises.map(object => object.exercise_id)
-                        console.log(searchRequest);
-                        // res.send({ routine, exercises: exercises })
                         const options = {
                             method: 'POST',
                             uri: 'https://firstrep.herokuapp.com/api/exrx/',
@@ -48,8 +46,8 @@ router.get('/:id', (req, res) => {
                                     message: body.message
                                 });
                             } else {
-                                res.send({ routine, body});
-                                console.log(body)
+                                const { exercises } = body;
+                                res.send({ routine, exercises });
                             }
                         }
                         request(options, callback).on('response', function(response, body) {
