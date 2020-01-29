@@ -48,7 +48,7 @@ router.get('/:id', (req, res) => {
                                     message: body.message
                                 });
                             } else {
-                                res.send({ routine, exercises: body});
+                                res.send({ routine, body});
                                 console.log(body)
                             }
                         }
