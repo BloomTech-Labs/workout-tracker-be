@@ -217,9 +217,9 @@ router.put("/:id/status/:id", (req, res) => {
   Status.update(id, changes)
     .then(Status => {
       if (Status) {
-        res.json({ update: Status });
+        return res.json({ update: Status });
       } else {
-        res
+        return res
           .status(404)
           .json({ message: "Could not find member status with given id" });
       }
