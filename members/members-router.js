@@ -217,7 +217,7 @@ router.put("/:id/status/:id", (req, res) => {
   Status.update(id, changes)
     .then(Status => {
       if (Status) {
-        return res.json({ update: Status });
+        return res.status(200).json({ update: Status });
       } else {
         return res
           .status(404)
