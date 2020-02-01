@@ -77,7 +77,7 @@ router.post("/", (req, res) => {
 
 router.post(
   "/login",
-  passport.authenticate("local", { session: false }),
+  // passport.authenticate("local", { session: false }),
   (req, res) => {
     const { id, first_name } = req.user;
     const payload = {
