@@ -58,7 +58,7 @@ router.post("/:id", (req, res) => {
 
   } else {
 
-    data.foreach(function(exercise) {
+    data.map(function(exercise) {
       const exerciseData = { exercise_id: exercise, routine_id: id }
       RoutinesExercises.add(exerciseData)
       .then(newRoutine => {
