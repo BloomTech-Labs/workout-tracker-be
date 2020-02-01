@@ -163,18 +163,33 @@ router.get("/:id/status", (req, res) => {
 
 router.post("/:id/status", requiredBody, (req, res) => {
   const statusInfo = { ...req.body, member_id: req.params.id };
-
-  Status.add(statusInfo)
+  
+  
+  Members.findStatus(req.params.id)
     .then(status => {
-      res.status(210).json(status);
+      res.json(status);
+      if (status.length==0) {
+        Status.add(statusInfo)
+        .then(status => {
+          return res.status(210).json(status);
+        })
+        .catch(error => {
+          // log error to server
+          console.log(error);
+          return res.status(500).json({
+            message: "Error adding status for the member"
+          });
+        });
+      } else {
+        return res.status(200).json({
+          message: "Already has Status"
+        })
+      }
     })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: "Error adding status for the member"
-      });
+    .catch(err => {
+      res.status(500).json({ message: "failed to get status" });
     });
+
 });
 
 router.get("/:id/status/:id", (req, res) => {
