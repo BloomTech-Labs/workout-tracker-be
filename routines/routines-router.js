@@ -1,7 +1,8 @@
 const express = require('express');
 
 const Routines = require('./routines-model');
-
+const RoutineExercises = require('../routineExercises/routineExercises-model');
+const request = require('request');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -23,7 +24,37 @@ router.get('/:id', (req, res) => {
         .then(routine => {
             
             if (routine) {
-                res.json(routine)
+                RoutineExercises.findByRoutine(id)
+                    .then(exercises => {
+                        const searchRequest = exercises.map(object => object.exercise_id)
+                        const options = {
+                            method: 'POST',
+                            uri: 'https://firstrep.herokuapp.com/api/exrx/',
+                            body: {
+                                search: searchRequest
+                            },
+                            json: true
+                        }
+
+                        function callback(error, response, body) {
+                            if (error) {
+                                res.status(response.statusCode).json({
+                                    message: error
+                                })
+                            } else if (body.success == false) {
+                                res.status(401).json({
+                                    message: body.message
+                                });
+                            } else {
+                                const { exercises } = body;
+                                res.send({ routine, exercises });
+                            }
+                        }
+                        request(options, callback).on('response', function(response, body) {
+                            console.log(response.message)
+                        })
+                        
+                    })
             } else {
                 res.status(404).json({
                     message: 'Could not find routine with given id'

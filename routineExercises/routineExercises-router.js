@@ -39,8 +39,12 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
-  const routineData = req.body;
+router.post("/:id", (req, res) => {
+  const { id } = req.params;
+  const data = req.body.exercise_id;
+  const routineData = { exercise_id: data, routine_id: id };
+
+  if (Number(data)) {
 
   RoutinesExercises.add(routineData)
     .then(newRoutine => {
@@ -48,9 +52,28 @@ router.post("/", (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        message: "Failed to create new exercise routine"
+        message: "Failed to add exercise to routine."
       });
     });
+
+  } else {
+
+    data.map(function(exercise) {
+      const exerciseData = { exercise_id: exercise, routine_id: id }
+      RoutinesExercises.add(exerciseData)
+      .then(newRoutine => {
+        res.status(201).json({
+          message: "All exercises have been added"
+        });
+      })
+      .catch(err => {
+        res.status(500).json({
+          message: "Failed to add exercise to routine."
+        });
+      });
+    })
+    
+  }
 });
 
 router.put("/:id", (req, res) => {

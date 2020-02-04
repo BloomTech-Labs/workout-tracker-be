@@ -31,8 +31,13 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
-  const memberExerciseData = req.body;
+router.post('/:id', (req, res) => {
+  const { id } = req.params;
+  const post = req.body;
+  const exercises = req.body.exercise_id;
+  const memberExerciseData = { routine_id: id, ...post };
+
+  if(Number(exercises)) {
 
   exerciseRecords.add(memberExerciseData)
   .then(newMemberExercise => {
@@ -41,6 +46,23 @@ router.post('/', (req, res) => {
   .catch(err => {
     res.status(500).json({ message: 'Failed to create new exercise record' });
   });
+
+} else {
+  exercises.foreach(function(exercise) {
+    const exerciseData = { exercise_id: exercise, ...post }
+    exerciseRecords.add(exerciseData)
+      .then(newRecord => {
+        res.status(201).json({
+          message: "All records have been saved"
+        });
+      })
+      .catch(err => {
+        res.status(500).json({
+          message: "Failed to add records to database"
+        })
+      })
+  })
+}
 });
 
 router.put('/:id', (req, res) => {
