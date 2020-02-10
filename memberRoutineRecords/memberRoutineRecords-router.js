@@ -43,23 +43,6 @@ router.post('/', (req, res) => {
   });
 });
 
-router.put('/:id', (req, res) => {
-  const { id } = req.params;
-  const changes = req.body;
-
-  memberRoutineRecords.update(id, changes)
-  .then(memberRoutineRecords => {
-    if (memberRoutineRecords) {
-      res.status(200).json({ update: memberRoutineRecords });
-    } else {
-      res.status(404).json({ message: 'Could not find an routine record with that id' });
-    }
-  })
-  .catch(err => {
-    res.status(500).json({ message: 'Failed to update the routine record' });
-  });
-});
-
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
