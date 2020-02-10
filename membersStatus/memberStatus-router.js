@@ -17,23 +17,6 @@ router.get("/", (req, res) => {
         .json({ message: "Failed to get member status", error: err });
     });
 });
-router.get("/:id", (req, res) => {
-  const { id } = req.params;
-
-  MemberStatus.findById(id)
-    .then(MemberStatus => {
-      if (MemberStatus) {
-        res.json(MemberStatus);
-      } else {
-        res
-          .status(404)
-          .json({ message: "Could not find member status with given id." });
-      }
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to get member status " });
-    });
-});
 
 router.post(
   "/",
