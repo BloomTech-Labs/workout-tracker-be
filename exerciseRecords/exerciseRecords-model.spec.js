@@ -70,14 +70,14 @@ describe('the exerciseRecords model', () => {
   describe('The add model', () => {
 
     it('Add should return status code 200', async () => {
-        const data = { routine_id: 1, routine_record_id: 1, sets: 1, reps: 1 };
+        const data = { routine_id: 1, sets: 1, reps: 1 };
         const record = { member_id: 1, routine_id: 1 };
         const user = { first_name: "Matheus", last_name: "Silva", email:"matheusqs.arq@gmail.com", username:"heuzin", password: "123456"};
         const routine = { routine_name: "Upper Test Body", routine_description: "Tri's and Bi's" };
         const addRoutine = await Routines.add(routine);
         const addUser = await Members.add(user);
         const addRecord = await memberRoutineRecords.add(record);
-        const res = await request(server).post('/api/exerciseRecords').set('Accept', 'application/json').send(data);
+        const res = await request(server).post('/api/exerciseRecords/1').set('Accept', 'application/json').send(data);
 
       expect(res.status).toBe(200)
     })

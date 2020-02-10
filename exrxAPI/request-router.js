@@ -11,7 +11,7 @@ router.post("/", async(req, res) => {
 
         if (search) {
             await new Promise(function(resolve, reject) {
-                request.post('http://204.235.60.194/consumer/login', {form:{username: process.env.EXRX_USERNAME, password: process.env.EXRX_PASSWORD}}, function(err, httpResponse, body) {
+                request.post('http://204.235.60.194/consumer/login', {form:{username: process.env.EXRX_USERNAME, password: process.env.EXRX_PASSWORD}}, function(err, body) {
                 bearer = JSON.parse(body);
                     if (err) {
                         reject(err);
@@ -53,7 +53,6 @@ router.post("/", async(req, res) => {
             }
 
             const getRequest = await request(getURL, callback);
-            console.log(getURL)
         } else {
             res.status(400).json({
                 message: "missing a search parameter"
@@ -63,7 +62,6 @@ router.post("/", async(req, res) => {
         res.status(500).json({
             message: "Failed to get exercises"
         })
-        console.log(err);
     }
 });
 
