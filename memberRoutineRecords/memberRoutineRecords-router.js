@@ -52,11 +52,11 @@ router.put('/:id', (req, res) => {
     if (memberRoutineRecords) {
       res.status(200).json({ update: memberRoutineRecords });
     } else {
-      res.status(404).json({ message: 'Could not find an exercise record with that id' });
+      res.status(404).json({ message: 'Could not find an routine record with that id' });
     }
   })
   .catch(err => {
-    res.status(500).json({ message: 'Failed to update the exercise record' });
+    res.status(500).json({ message: 'Failed to update the routine record' });
   });
 });
 
