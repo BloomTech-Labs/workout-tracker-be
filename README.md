@@ -77,6 +77,41 @@ https://firstrep.herokuapp.com/
 | PUT    | `/api/routinesexercises:id` | owners         | Updates exercise tied to routine with given ID.          |
 | DELETE | `/api/routinesexercises:id` | owners         | Deletes exercise tied to routine with given ID.          |
 
+#### exerciseRecords Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/exerciseRecords`     | owners         | Returns all individual exercise records.                  |
+| GET    | `/api/exerciseRecords:id` | owners         | Returns an individual exercise record ID.          |
+| POST   | `/api/exerciseRecords`     | owners         | Ties an exercise record to a routine record.                  |
+| PUT    | `/api/exerciseRecords:id` | owners         | Updates exercise record with given ID.          |
+| DELETE | `/api/exerciseRecords:id` | owners         | Deletes exercise record with given ID.          |
+
+#### memberRoutineRecords Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/memberRoutineRecords`     | owners         | Returns recorded routines.                  |
+| GET    | `/api/memberRoutineRecords:id` | owners         | Returns a routine record with given ID.          |
+| POST   | `/api/memberRoutineRecords`     | owners         | Records a routine.                  |
+| PUT    | `/api/memberRoutineRecords:id` | owners         | Updates routine record with given ID.          |
+| DELETE | `/api/memberRoutineRecords:id` | owners         | Deletes routine record with given ID.          |
+
+#### favorites Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/favorites`     | owners         | Returns all routines that have been favorited.                  |
+| GET    | `/api/favorites:id` | owners         | Returns all routines favorited by a user with the given ID.          |
+| POST   | `/api/favorites`     | owners         | favorites a routine.                  |
+| DELETE | `/api/favorites:id` | owners         | Deletes a routine favorited by a user.          |
+
+#### EXRX Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST   | `/api/exrx`     | owners         | returns an exercise (or exercises) from exrx API. Accepts an array of numbers or a string   |
+
 # Data Model
 
 🚫This is just an example. Replace this with your data model
@@ -134,6 +169,40 @@ https://firstrep.herokuapp.com/
 | id   | UUID    | Unique identifier automatically assigned by DB                  |
 | exercise_id  | INTEGER | Not nullable. ID of exercise from exrx to be added to routine          |
 | routine_id | STRING   | Not nullable. Foreign key. Ties exercise to routine                  |
+
+---
+
+#### member_routine_records
+
+| Column | Type                |  Description                                  |
+| ------ | ----------------------- | -------------------------------------------- |
+| id   | UUID    | Unique identifier automatically assigned by DB                  |
+| member_id  | INTEGER | Not nullable. ID of member from member table          |
+| routine_id | INTEGER   | Not nullable. Foreign key. routine member completed                  |
+
+---
+
+#### exercise_records
+
+| Column | Type                |  Description                                  |
+| ------ | ----------------------- | -------------------------------------------- |
+| id   | UUID    | Unique identifier automatically assigned by DB                  |
+| exercise_id  | INTEGER | ID of exercise from exrx to be added to routine          |
+| routine_id | INTEGER   | Not nullable. Foreign key. Ties exercise to routine                  |
+| routine_record_id | INTEGER   | Not nullable. Foreign key. Ties exercise record to routine record                |
+| sets | INTEGER   | Not nullable. Number of sets completed                  |
+| reps | INTEGER   | Not nullable. Number of reps completed                  |
+| notes | INTEGER   | Can be used to specify the amount of weight used or amount of time taken to complete exercise                 |
+| exercise_date | DATE   | Automatically fills out date the record was submitted.                  |
+
+---
+
+#### routine_favorites
+
+| Column | Type                |  Description                                  |
+| ------ | ----------------------- | -------------------------------------------- |
+| user_id  | INTEGER | Not nullable. Foreign key and Primary key. ID of user from member table.           |
+| routine_id | INTEGER   | Not nullable. Foreign key and Primary key. Favorited routine.                  |
 
 ## 2️⃣ Actions
 
