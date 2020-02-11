@@ -43,7 +43,9 @@ router.post("/:id", (req, res) => {
   const { id } = req.params;
   const data = req.body.exercise_id;
   const routineData = { exercise_id: data, routine_id: id };
+
   if (Number(data)) {
+
   RoutinesExercises.add(routineData)
     .then(newRoutine => {
       res.status(201).json(newRoutine);
@@ -53,7 +55,9 @@ router.post("/:id", (req, res) => {
         message: "Failed to add exercise to routine."
       });
     });
+
   } else {
+
     data.map(function(exercise) {
       const exerciseData = { exercise_id: exercise, routine_id: id }
       RoutinesExercises.add(exerciseData)
@@ -68,6 +72,7 @@ router.post("/:id", (req, res) => {
         });
       });
     })
+    
   }
 });
 

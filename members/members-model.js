@@ -36,7 +36,8 @@ function findStatus(member_id) {
       "s.bmi",
       "s.bench_max",
       "s.squat_max",
-      "s.mile_time"
+      "s.mile_time",
+      "s.exercise_date"
     )
     .where({ member_id });
 }
