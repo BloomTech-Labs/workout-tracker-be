@@ -17,6 +17,7 @@ router.get("/", (req, res) => {
         .json({ message: "Failed to get member status", error: err });
     });
 });
+
 router.get("/:id", (req, res) => {
   const { id } = req.params;
 
