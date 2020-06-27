@@ -12,7 +12,8 @@ router.post("/", async(req, res) => {
         if (search) {
             await new Promise(function(resolve, reject) {
                 request.post('http://204.235.60.194/consumer/login', {form:{username: process.env.EXRX_USERNAME, password: process.env.EXRX_PASSWORD}}, function(err, body) {
-                bearer = JSON.parse(body);
+                console.log("test", JSON.parse(body.body));
+                bearer = JSON.parse(body.body);
                     if (err) {
                         reject(err);
                     } else {
