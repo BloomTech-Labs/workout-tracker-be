@@ -24,7 +24,7 @@
     "global": "^4.4.0",
     "helmet": "^3.21.2",
     "jest": "^24.9.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "knex": "0.19.5",
     "mime": "1.4.1",
     "node": "^13.3.0",
